@@ -44,6 +44,7 @@ class PayExpresse
     private $testMode = false;
 
     private $isMobile = false;
+    private $noCalculateFee  = 0;
 
     private $currency = 'XOF';
 
@@ -63,12 +64,22 @@ class PayExpresse
     }
 
     /**
+     * @param int $noCalculateFee
+     */
+    public function setnoCalculateFee($noCalculateFee)
+    {
+        $this->noCalculateFee =$noCalculateFee ;
+    }
+
+    /**
      * @param string $apiKey
      */
     public function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
     }
+
+   
 
     /**
      * @param string $apiSecret
@@ -88,6 +99,7 @@ class PayExpresse
             'item_name' => PayExpresse::arrayGet($this->query, 'item_name'),
             'item_price' => PayExpresse::arrayGet($this->query, 'item_price'),
             'command_name' => PayExpresse::arrayGet($this->query, 'command_name'),
+            'no_calculate_fee' => $this->noCalculateFee,
             'ref_command' => $this->refCommand,
             'env' => ($this->testMode) ? 'test' : 'prod',
             'currency' => $this->currency,
